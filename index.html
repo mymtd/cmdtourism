@@ -1,28 +1,363 @@
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-  </head>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desa Wisata Cimande</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #333;
+    }
 
-  <body>
-    <a-scene mindar-image="imageTargetSrc: ./assets/targets.mind ://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind;"
-    color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false"
-    >
-      <a-assets>
-	      <!--img id="card" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.png" /-->
-	      <a-asset-item id="SAMPLE" src=" ./assets/targets.gltf  https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
-      </a-assets>
+    header {
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
 
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    /* ==== CAROUSEL ==== */
+    .carousel-container {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+      overflow: hidden;
+      padding: 1rem 0;
+    }
 
-      <a-entity mindar-image-target="targetIndex: 0">
-        <!--a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane-->
-        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#SAMPLE"
-          animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
-        >
-      </a-entity>
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+    }
 
-    </a-scene>
-  </body>
+    .carousel-item {
+      min-width: calc(100% / 3);
+      box-sizing: border-box;
+      padding: 0 0.5rem;
+      cursor: pointer;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .carousel-item img:hover {
+      transform: scale(1.05);
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.8);
+      border: none;
+      font-size: 2rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      z-index: 2;
+    }
+
+    .carousel-btn:hover {
+      background: #ff385c;
+      color: white;
+    }
+
+    .carousel-btn.prev {
+      left: 10px;
+    }
+
+    .carousel-btn.next {
+      right: 10px;
+    }
+
+    /* ==== HERO SECTION ==== */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    .hero h2 {
+      font-family: "Brush Script MT", cursive;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    /* ==== CTA BUTTON ==== */
+    .cta {
+      display: inline-block;
+      margin: 2rem auto;
+      padding: 1.5rem 2rem;
+      border-radius: 16px;
+      background: #ff385c;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      line-height: 1.6;
+      box-shadow: 0 6px 20px rgba(255,56,92,0.3);
+    }
+
+    .cta:hover {
+      background-color: #e61e4d;
+      cursor: pointer;
+    }
+
+    /* ==== FOOTER ==== */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #fafafa;
+      border-top: 1px solid #eee;
+    }
+
+    .social {
+      margin: 1rem 0;
+    }
+
+    .social a {
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      border: 1px solid #ddd;
+      border-radius: 24px;
+      text-decoration: none;
+      color: #333;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .social a:hover {
+      border-color: #ff385c;
+      color: #ff385c;
+    }
+
+    /* ==== MODAL ==== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 16px;
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .modal-content h3 {
+      margin: 0.5rem 0;
+    }
+
+    .modal-content p {
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.9);}
+      to {opacity: 1; transform: scale(1);}
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    DESA WISATA CIMANDE
+  </header>
+
+  <!-- IMAGE CAROUSEL -->
+  <section class="carousel-container">
+    <button class="carousel-btn prev">&#10094;</button>
+    <div class="carousel-track">
+      <div class="carousel-item" 
+           data-title="Air Terjun Cimande" 
+           data-desc="Keindahan air terjun alami yang menjadi salah satu daya tarik utama di Cimande."
+           data-img="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Nature 1">
+      </div>
+      <div class="carousel-item" 
+           data-title="Sawah Hijau" 
+           data-desc="Hamparan persawahan hijau dengan suasana pedesaan yang menenangkan."
+           data-img="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="Nature 2">
+      </div>
+      <div class="carousel-item" 
+           data-title="Gunung Salak" 
+           data-desc="Pemandangan Gunung Salak yang megah dari desa Cimande."
+           data-img="https://images.unsplash.com/photo-1491553895911-0055eca6402d">
+        <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d" alt="Nature 3">
+      </div>
+      <div class="carousel-item" 
+           data-title="Seni Pencak Silat" 
+           data-desc="Pertunjukan tradisional pencak silat Cimande yang mendunia."
+           data-img="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470" alt="Nature 4">
+      </div>
+      <div class="carousel-item" 
+           data-title="Sungai Alami" 
+           data-desc="Sungai jernih yang mengalir di desa, cocok untuk rekreasi keluarga."
+           data-img="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f4">
+        <img src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f4" alt="Nature 5">
+      </div>
+      <div class="carousel-item" 
+           data-title="Budaya Lokal" 
+           data-desc="Tradisi dan kearifan lokal masyarakat Cimande yang masih terjaga."
+           data-img="https://images.unsplash.com/photo-1470770841072-f978cf4d019e">
+        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e" alt="Nature 6">
+      </div>
+    </div>
+    <button class="carousel-btn next">&#10095;</button>
+  </section>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <h2>Wilujeng Sumping</h2>
+    <p>
+      Desa wisata Cimande di Kecamatan Caringin, Kabupaten Bogor, 
+      memadukan perpaduan antara keindahan alam dan kekayaan budaya tradisional.
+    </p>
+
+    <!-- CTA BUTTON LINK TO ANOTHER PAGE -->
+    <a href="ar.html" class="cta">
+      JELAJAHI <br>
+      MELALUI <br>
+      KAMERA AR
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="social">
+      <a href="https://instagram.com/DesaWisataCimande">📷 @DesaWisataCimande</a>
+      <a href="https://desawisatacimande.com">🌐 DesaWisataCimande.com</a>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal" id="imageModal">
+    <div class="modal-content">
+      <button class="close-btn">&times;</button>
+      <img id="modalImg" src="" alt="Preview">
+      <h3 id="modalTitle">Placeholder Title</h3>
+      <p id="modalDesc">Placeholder description</p>
+    </div>
+  </div>
+
+  <script>
+    // Carousel script
+    const track = document.querySelector('.carousel-track');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+    let index = 0;
+    const itemsToShow = 3;
+    const totalItems = document.querySelectorAll('.carousel-item').length;
+
+    function updateCarousel() {
+      const itemWidth = track.querySelector('.carousel-item').offsetWidth;
+      track.style.transform = `translateX(${-index * itemWidth}px)`;
+    }
+
+    function nextSlide() {
+      if (index < totalItems - itemsToShow) {
+        index++;
+      } else {
+        index = 0; // loop back
+      }
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      if (index > 0) {
+        index--;
+      } else {
+        index = totalItems - itemsToShow; // go to last group
+      }
+      updateCarousel();
+    }
+
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    // Auto scroll every 3s
+    setInterval(nextSlide, 3000);
+
+    window.addEventListener('resize', updateCarousel);
+
+    // Modal logic
+    const modal = document.getElementById('imageModal');
+    const closeBtn = modal.querySelector('.close-btn');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalImg = document.getElementById('modalImg');
+    const items = document.querySelectorAll('.carousel-item');
+
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        modalTitle.textContent = item.dataset.title;
+        modalDesc.textContent = item.dataset.desc;
+        modalImg.src = item.dataset.img;
+        modal.style.display = 'flex';
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
+
+</body>
 </html>
