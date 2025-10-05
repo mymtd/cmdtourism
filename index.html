@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Desa Wisata Cimande</title>
+
   <style>
     body {
       font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -11,6 +12,35 @@
       padding: 0;
       background: #fff;
       color: #333;
+      position: relative;
+    }
+
+    /* ==== HERO BACKGROUND IMAGE ==== */
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 600px; /* covers header + carousel + hero */
+      background: url("./assets/img-alam2.jpg") no-repeat center/cover;
+      opacity: 0.25; /* 30% opacity */
+      z-index: 0;
+    }
+
+    /* Gradient fade effect */
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 200px; /* how tall the fade is */
+      background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #fff 100%);
+    }
+
+    header, .carousel-container, .hero {
+      position: relative;
+      z-index: 1; /* ensure content stays above bg */
     }
 
     header {
@@ -40,10 +70,10 @@
       padding: 0 0.5rem;
       cursor: pointer;
     }
-
+    
     .carousel-item img {
       width: 100%;
-      height: 220px;
+      aspect-ratio: 1 / 1;   /* Boxy ratio, adjust as needed */
       object-fit: cover;
       border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -69,7 +99,7 @@
     }
 
     .carousel-btn:hover {
-      background: #ff385c;
+      background: #169a1c;
       color: white;
     }
 
@@ -84,42 +114,63 @@
     /* ==== HERO SECTION ==== */
     .hero {
       text-align: center;
-      padding: 3rem 1rem;
+      padding: 0.5rem 1rem 3rem;
     }
 
     .hero h2 {
       font-family: "Brush Script MT", cursive;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
     }
 
     .hero p {
-      font-size: 1.2rem;
+      font-size: 0.8rem;
       max-width: 600px;
       margin: 0 auto;
-      line-height: 1.6;
+      line-height: 1.2;
       color: #555;
     }
 
     /* ==== CTA BUTTON ==== */
     .cta {
       display: inline-block;
+      position: relative;
       margin: 2rem auto;
-      padding: 1.5rem 2rem;
-      border-radius: 16px;
-      background: #ff385c;
+      padding: 2rem 3.5rem;
+      border-radius: 30px;
+      background: #15b02c;
       color: white;
-      font-size: 1.2rem;
+      font-size: 1.6rem;
       font-weight: bold;
       text-align: center;
       text-decoration: none;
       line-height: 1.6;
-      box-shadow: 0 6px 20px rgba(255,56,92,0.3);
+      box-shadow: 0 8px 24px rgba(11, 158, 150, 0.35);
+      overflow: hidden;
+      transition: transform 0.2s, background 0.3s;
     }
 
     .cta:hover {
-      background-color: #e61e4d;
+      background-color: #15b02c;;
+      transform: scale(1.05);
       cursor: pointer;
+    }
+
+    /* 📷 Emoji Watermark */
+    .cta::before {
+      content: "📷";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 8em;   /* scales with button */
+      transform: translate(-50%, -50%);
+      opacity: 0.1;
+      pointer-events: none;
+    }
+
+    .cta span {
+      position: relative;
+      z-index: 1;
     }
 
     /* ==== FOOTER ==== */
@@ -207,51 +258,62 @@
     }
   </style>
 </head>
-<body>
 
-  <header>
-    DESA WISATA CIMANDE
-  </header>
+
+<body>
+  <!-- HERO BACKGROUND IMAGE -->
+  <div class="hero-bg"></div>
+  <header></header>
 
   <!-- IMAGE CAROUSEL -->
   <section class="carousel-container">
     <button class="carousel-btn prev">&#10094;</button>
     <div class="carousel-track">
       <div class="carousel-item" 
-           data-title="Air Terjun Cimande" 
-           data-desc="Keindahan air terjun alami yang menjadi salah satu daya tarik utama di Cimande."
-           data-img="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Nature 1">
+           data-title="Seni Pencak Silat Cimande" 
+           data-desc="Pencak Silat Cimande merupakan salah satu aliran silat tertua dan paling berpengaruh di Indonesia.
+           Dikenal sejak abad ke-18, aliran ini menonjolkan teknik pertahanan diri yang mengutamakan ketenangan, keseimbangan, serta kemampuan memanfaatkan tenaga lawan.
+           Selain aspek bela diri, Cimande juga sarat dengan nilai-nilai spiritual dan filosofi hidup yang menekankan disiplin, kesabaran, serta rasa hormat kepada guru dan sesama."
+           data-img="./assets/img-pencak1.jpg">
+        <img src="./assets/img-pencak1.jpg" alt="Pencak Silat">
       </div>
       <div class="carousel-item" 
-           data-title="Sawah Hijau" 
-           data-desc="Hamparan persawahan hijau dengan suasana pedesaan yang menenangkan."
-           data-img="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
-        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="Nature 2">
+           data-title="Seni Pencak Silat Cimande" 
+           data-desc="Pencak Silat Cimande merupakan salah satu aliran silat tertua dan paling berpengaruh di Indonesia.
+           Dikenal sejak abad ke-18, aliran ini menonjolkan teknik pertahanan diri yang mengutamakan ketenangan, keseimbangan, serta kemampuan memanfaatkan tenaga lawan.
+           Selain aspek bela diri, Cimande juga sarat dengan nilai-nilai spiritual dan filosofi hidup yang menekankan disiplin, kesabaran, serta rasa hormat kepada guru dan sesama."
+           data-img="./assets/img-pencak2.jpg">
+        <img src="./assets/img-pencak2.jpg" alt="Pencak Silat">
       </div>
       <div class="carousel-item" 
-           data-title="Gunung Salak" 
-           data-desc="Pemandangan Gunung Salak yang megah dari desa Cimande."
-           data-img="https://images.unsplash.com/photo-1491553895911-0055eca6402d">
-        <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d" alt="Nature 3">
+           data-title="Agro Wisata Cimande" 
+           data-desc="Agro wisata di Desa Cimande merupakan salah satu daya tarik unggulan yang menggabungkan keindahan alam dengan edukasi pertanian.
+           Pengunjung dapat menikmati suasana hijau pedesaan sambil mengenal lebih dekat proses budidaya salak Slebor, varietas lokal yang terkenal dengan rasa manis dan teksturnya yang khas.
+           Selain itu, kebun lidah buaya di kawasan ini juga menarik untuk dikunjungi, karena tanaman tersebut diolah menjadi berbagai produk seperti minuman, kosmetik, dan bahan pengobatan tradisional."
+           data-img="./assets/img-salak2.jpg">
+        <img src="./assets/img-salak2.jpg" alt="Agro Wisata">
       </div>
       <div class="carousel-item" 
-           data-title="Seni Pencak Silat" 
-           data-desc="Pertunjukan tradisional pencak silat Cimande yang mendunia."
-           data-img="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
-        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470" alt="Nature 4">
+           data-title="Agro Wisata Cimande" 
+           data-desc="Agro wisata di Desa Cimande merupakan salah satu daya tarik unggulan yang menggabungkan keindahan alam dengan edukasi pertanian.
+           Pengunjung dapat menikmati suasana hijau pedesaan sambil mengenal lebih dekat proses budidaya salak Slebor, varietas lokal yang terkenal dengan rasa manis dan teksturnya yang khas.
+           Selain itu, kebun lidah buaya di kawasan ini juga menarik untuk dikunjungi, karena tanaman tersebut diolah menjadi berbagai produk seperti minuman, kosmetik, dan bahan pengobatan tradisional."
+           data-img="./assets/img-lidah3.jpg">
+        <img src="./assets/img-lidah3.jpg" alt="Agro Wisata">
       </div>
       <div class="carousel-item" 
-           data-title="Sungai Alami" 
-           data-desc="Sungai jernih yang mengalir di desa, cocok untuk rekreasi keluarga."
-           data-img="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f4">
-        <img src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f4" alt="Nature 5">
+           data-title="Wisata Alam & Trekking" 
+           data-desc="Bagi pecinta alam dan petualangan, jalur trekking di kaki Gunung Salak dan Pangrango yang melintasi Desa Cimande menjadi pilihan ideal untuk menikmati suasana alami di Jawa Barat.
+           Aktivitas ini tidak hanya menyegarkan tubuh dan pikiran, tetapi juga memberi kesempatan untuk merasakan harmoni antara alam, budaya, dan kehidupan masyarakat pedesaan yang masih terjaga keasliannya."
+           data-img="./assets/img-alam4.jpg">
+        <img src="./assets/img-alam4.jpg" alt="Trekking">
       </div>
       <div class="carousel-item" 
-           data-title="Budaya Lokal" 
-           data-desc="Tradisi dan kearifan lokal masyarakat Cimande yang masih terjaga."
-           data-img="https://images.unsplash.com/photo-1470770841072-f978cf4d019e">
-        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e" alt="Nature 6">
+           data-title="Wisata Alam & Trekking" 
+           data-desc="Bagi pecinta alam, jalur trekking di kaki Gunung Salak dan Pangrango yang melintasi Desa Cimande menjadi pilihan ideal untuk menikmati suasana alami di Jawa Barat.
+           Aktivitas ini tidak hanya menyegarkan tubuh dan pikiran, tetapi juga memberi kesempatan untuk merasakan harmoni antara alam, budaya, dan kehidupan masyarakat pedesaan yang masih terjaga keasliannya."
+           data-img="./assets/img-alam2.jpg">
+        <img src="./assets/img-alam2.jpg" alt="Trekking">
       </div>
     </div>
     <button class="carousel-btn next">&#10095;</button>
@@ -261,21 +323,25 @@
   <section class="hero">
     <h2>Wilujeng Sumping</h2>
     <p>
-      Desa wisata Cimande di Kecamatan Caringin, Kabupaten Bogor, 
-      memadukan perpaduan antara keindahan alam dan kekayaan budaya tradisional.
+      Desa Wisata Cimande di Kabupaten Bogor menawarkan perpaduan keindahan alam dan kekayaan budaya tradisional. 
+      Terletak di kaki Gunung Salak dan Pangrango, desa ini menjadi pusat aliran pencak silat tertua di Jawa Barat serta tradisi pengobatan patah tulang yang melegenda.
+      Wisatawan juga dapat menikmati persawahan, kebun salak, serta panorama pegunungan yang menenangkan.
     </p>
 
-    <!-- CTA BUTTON LINK TO ANOTHER PAGE -->
-    <a href="ar.html" class="cta">
-      JELAJAHI <br>
-      MELALUI <br>
-      KAMERA AR
+    <!-- CTA BUTTON -->
+    <a href="mindar.html" class="cta">
+      <span>
+        JELAJAHI <br>
+        MELALUI <br>
+        KAMERA AR
+      </span>
     </a>
   </section>
 
   <!-- FOOTER -->
   <footer>
     <div class="social">
+      <a href="https://www.google.com/maps/place/Desa+Wisata+Cimande">📍 Desa Wisata Cimande</a>
       <a href="https://instagram.com/DesaWisataCimande">📷 @DesaWisataCimande</a>
       <a href="https://desawisatacimande.com">🌐 DesaWisataCimande.com</a>
     </div>
@@ -286,78 +352,95 @@
     <div class="modal-content">
       <button class="close-btn">&times;</button>
       <img id="modalImg" src="" alt="Preview">
-      <h3 id="modalTitle">Placeholder Title</h3>
-      <p id="modalDesc">Placeholder description</p>
+      <h3 id="modalTitle">Title</h3>
+      <p id="modalDesc">Description</p>
     </div>
   </div>
 
+
   <script>
-    // Carousel script
     const track = document.querySelector('.carousel-track');
     const prevBtn = document.querySelector('.carousel-btn.prev');
     const nextBtn = document.querySelector('.carousel-btn.next');
-    let index = 0;
     const itemsToShow = 3;
-    const totalItems = document.querySelectorAll('.carousel-item').length;
+    const originalItems = [...document.querySelectorAll('.carousel-item')];
+    const totalItems = originalItems.length;
 
-    function updateCarousel() {
-      const itemWidth = track.querySelector('.carousel-item').offsetWidth;
-      track.style.transform = `translateX(${-index * itemWidth}px)`;
+    // Clone first & last items
+    originalItems.slice(0, itemsToShow).forEach(item => {
+      const clone = item.cloneNode(true);
+      track.appendChild(clone);
+    });
+    originalItems.slice(-itemsToShow).forEach(item => {
+      const clone = item.cloneNode(true);
+      track.insertBefore(clone, track.firstChild);
+    });
+
+    // Updated list after cloning
+    const allItems = document.querySelectorAll('.carousel-item');
+    let itemWidth = allItems[0].offsetWidth;
+    let currentIndex = itemsToShow; // Start from "real" first
+
+    track.style.transform = `translateX(${-itemWidth * currentIndex}px)`;
+
+    function moveTo(index) {
+      track.style.transition = "transform 0.6s ease-in-out";
+      track.style.transform = `translateX(${-itemWidth * index}px)`;
+      currentIndex = index;
     }
 
-    function nextSlide() {
-      if (index < totalItems - itemsToShow) {
-        index++;
-      } else {
-        index = 0; // loop back
+    function nextSlide() { moveTo(currentIndex + 1); }
+    function prevSlide() { moveTo(currentIndex - 1); }
+
+    track.addEventListener("transitionend", () => {
+      if (currentIndex >= totalItems + itemsToShow) {
+        track.style.transition = "none";
+        currentIndex = itemsToShow;
+        track.style.transform = `translateX(${-itemWidth * currentIndex}px)`;
       }
-      updateCarousel();
-    }
-
-    function prevSlide() {
-      if (index > 0) {
-        index--;
-      } else {
-        index = totalItems - itemsToShow; // go to last group
+      if (currentIndex < itemsToShow) {
+        track.style.transition = "none";
+        currentIndex = totalItems + itemsToShow - 1;
+        track.style.transform = `translateX(${-itemWidth * currentIndex}px)`;
       }
-      updateCarousel();
-    }
+    });
 
     nextBtn.addEventListener('click', nextSlide);
     prevBtn.addEventListener('click', prevSlide);
 
-    // Auto scroll every 3s
+    // Auto scroll
     setInterval(nextSlide, 3000);
 
-    window.addEventListener('resize', updateCarousel);
+    window.addEventListener('resize', () => {
+      itemWidth = allItems[0].offsetWidth;
+      track.style.transition = "none";
+      track.style.transform = `translateX(${-itemWidth * currentIndex}px)`;
+    });
 
-    // Modal logic
+    // ==== MODAL LOGIC ====
     const modal = document.getElementById('imageModal');
     const closeBtn = modal.querySelector('.close-btn');
     const modalTitle = document.getElementById('modalTitle');
     const modalDesc = document.getElementById('modalDesc');
     const modalImg = document.getElementById('modalImg');
-    const items = document.querySelectorAll('.carousel-item');
 
-    items.forEach(item => {
-      item.addEventListener('click', () => {
-        modalTitle.textContent = item.dataset.title;
-        modalDesc.textContent = item.dataset.desc;
-        modalImg.src = item.dataset.img;
-        modal.style.display = 'flex';
+    // Attach click handler to ALL items (original + cloned)
+    function attachModalEvents() {
+      document.querySelectorAll('.carousel-item').forEach(item => {
+        item.addEventListener('click', () => {
+          modalTitle.textContent = item.dataset.title;
+          modalDesc.textContent = item.dataset.desc;
+          modalImg.src = item.dataset.img;
+          modal.style.display = 'flex';
+        });
       });
-    });
+    }
+    attachModalEvents();
 
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
+    closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+    modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
   </script>
+
 
 </body>
 </html>
