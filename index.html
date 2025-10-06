@@ -23,11 +23,9 @@
       width: 100%;
       height: 600px; /* covers header + carousel + hero */
       background: url("./assets/img-alam2.jpg") no-repeat center/cover;
-      opacity: 0.25; /* 30% opacity */
+      opacity: 0.25; /* opacity */
       z-index: 0;
     }
-
-    /* Gradient fade effect */
     .hero-bg::after {
       content: "";
       position: absolute;
@@ -37,12 +35,10 @@
       height: 200px; /* how tall the fade is */
       background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #fff 100%);
     }
-
     header, .carousel-container, .hero {
       position: relative;
-      z-index: 1; /* ensure content stays above bg */
+      z-index: 1;
     }
-
     header {
       padding: 1.5rem 2rem;
       text-align: center;
@@ -58,32 +54,27 @@
       overflow: hidden;
       padding: 1rem 0;
     }
-
     .carousel-track {
       display: flex;
       transition: transform 0.6s ease-in-out;
     }
-
     .carousel-item {
       min-width: calc(100% / 3);
       box-sizing: border-box;
       padding: 0 0.5rem;
       cursor: pointer;
     }
-    
     .carousel-item img {
       width: 100%;
-      aspect-ratio: 1 / 1;   /* Boxy ratio, adjust as needed */
+      aspect-ratio: 5 / 4;
       object-fit: cover;
       border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s;
     }
-
     .carousel-item img:hover {
       transform: scale(1.05);
     }
-
     .carousel-btn {
       position: absolute;
       top: 50%;
@@ -97,16 +88,13 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
       z-index: 2;
     }
-
     .carousel-btn:hover {
-      background: #169a1c;
+      background: seagreen;
       color: white;
     }
-
     .carousel-btn.prev {
       left: 10px;
     }
-
     .carousel-btn.next {
       right: 10px;
     }
@@ -116,13 +104,11 @@
       text-align: center;
       padding: 0.5rem 1rem 3rem;
     }
-
     .hero h2 {
       font-family: "Brush Script MT", cursive;
       font-size: 3rem;
       margin-bottom: 1.5rem;
     }
-
     .hero p {
       font-size: 0.8rem;
       max-width: 600px;
@@ -130,7 +116,6 @@
       line-height: 1.2;
       color: #555;
     }
-
     /* ==== CTA BUTTON ==== */
     .cta {
       display: inline-block;
@@ -149,25 +134,21 @@
       overflow: hidden;
       transition: transform 0.2s, background 0.3s;
     }
-
     .cta:hover {
-      background-color: #15b02c;;
+      background-color: seagreen;
       transform: scale(1.05);
       cursor: pointer;
     }
-
-    /* 📷 Emoji Watermark */
     .cta::before {
       content: "📷";
       position: absolute;
       top: 50%;
       left: 50%;
-      font-size: 8em;   /* scales with button */
+      font-size: 7em;
       transform: translate(-50%, -50%);
       opacity: 0.1;
       pointer-events: none;
     }
-
     .cta span {
       position: relative;
       z-index: 1;
@@ -180,11 +161,9 @@
       background: #fafafa;
       border-top: 1px solid #eee;
     }
-
     .social {
       margin: 1rem 0;
     }
-
     .social a {
       display: inline-block;
       margin: 0.5rem;
@@ -196,10 +175,9 @@
       font-size: 1rem;
       transition: 0.3s;
     }
-
     .social a:hover {
-      border-color: #ff385c;
-      color: #ff385c;
+      border-color: greenyellow;
+      color: greenyellow;
     }
 
     /* ==== MODAL ==== */
@@ -213,7 +191,6 @@
       justify-content: center;
       z-index: 1000;
     }
-
     .modal-content {
       background: #fff;
       padding: 1.5rem;
@@ -224,7 +201,6 @@
       position: relative;
       animation: fadeIn 0.3s ease;
     }
-
     .modal-content img {
       width: 100%;
       max-height: 300px;
@@ -232,16 +208,13 @@
       border-radius: 12px;
       margin-bottom: 1rem;
     }
-
     .modal-content h3 {
       margin: 0.5rem 0;
     }
-
     .modal-content p {
       color: #555;
       line-height: 1.6;
     }
-
     .close-btn {
       position: absolute;
       top: 10px;
@@ -251,7 +224,6 @@
       background: none;
       cursor: pointer;
     }
-
     @keyframes fadeIn {
       from {opacity: 0; transform: scale(0.9);}
       to {opacity: 1; transform: scale(1);}
@@ -261,11 +233,9 @@
 
 
 <body>
-  <!-- HERO BACKGROUND IMAGE -->
   <div class="hero-bg"></div>
   <header></header>
 
-  <!-- IMAGE CAROUSEL -->
   <section class="carousel-container">
     <button class="carousel-btn prev">&#10094;</button>
     <div class="carousel-track">
@@ -291,7 +261,7 @@
            Pengunjung dapat menikmati suasana hijau pedesaan sambil mengenal lebih dekat proses budidaya salak Slebor, varietas lokal yang terkenal dengan rasa manis dan teksturnya yang khas.
            Selain itu, kebun lidah buaya di kawasan ini juga menarik untuk dikunjungi, karena tanaman tersebut diolah menjadi berbagai produk seperti minuman, kosmetik, dan bahan pengobatan tradisional."
            data-img="./assets/img-salak2.jpg">
-        <img src="./assets/img-salak2.jpg" alt="Agro Wisata">
+        <img src="./assets/img-salak1.jpg" alt="Agro Wisata">
       </div>
       <div class="carousel-item" 
            data-title="Agro Wisata Cimande" 
@@ -310,7 +280,7 @@
       </div>
       <div class="carousel-item" 
            data-title="Wisata Alam & Trekking" 
-           data-desc="Bagi pecinta alam, jalur trekking di kaki Gunung Salak dan Pangrango yang melintasi Desa Cimande menjadi pilihan ideal untuk menikmati suasana alami di Jawa Barat.
+           data-desc="Bagi pecinta alam, jalur trekking di kaki Gunung Salak dan Gede Pangrango yang melintasi Desa Cimande menjadi pilihan ideal untuk menikmati suasana alami di Jawa Barat.
            Aktivitas ini tidak hanya menyegarkan tubuh dan pikiran, tetapi juga memberi kesempatan untuk merasakan harmoni antara alam, budaya, dan kehidupan masyarakat pedesaan yang masih terjaga keasliannya."
            data-img="./assets/img-alam2.jpg">
         <img src="./assets/img-alam2.jpg" alt="Trekking">
@@ -319,35 +289,31 @@
     <button class="carousel-btn next">&#10095;</button>
   </section>
 
-  <!-- HERO SECTION -->
   <section class="hero">
     <h2>Wilujeng Sumping</h2>
     <p>
       Desa Wisata Cimande di Kabupaten Bogor menawarkan perpaduan keindahan alam dan kekayaan budaya tradisional. 
-      Terletak di kaki Gunung Salak dan Pangrango, desa ini menjadi pusat aliran pencak silat tertua di Jawa Barat serta tradisi pengobatan patah tulang yang melegenda.
+      Terletak di kaki Gunung Salak dan Gede Pangrango, desa ini menjadi pusat aliran pencak silat tertua di Jawa Barat serta tradisi pengobatan patah tulang yang melegenda.
       Wisatawan juga dapat menikmati persawahan, kebun salak, serta panorama pegunungan yang menenangkan.
     </p>
 
-    <!-- CTA BUTTON -->
     <a href="mindar.html" class="cta">
       <span>
-        JELAJAHI <br>
-        MELALUI <br>
+        TELUSURI <br>
+        DENGAN <br>
         KAMERA AR
       </span>
     </a>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="social">
-      <a href="https://www.google.com/maps/place/Desa+Wisata+Cimande">📍 Desa Wisata Cimande</a>
+      <a href="https://maps.app.goo.gl/YxYSKX5mXFWscWH2A">📍 Desa Wisata Cimande</a>
       <a href="https://instagram.com/DesaWisataCimande">📷 @DesaWisataCimande</a>
       <a href="https://desawisatacimande.com">🌐 DesaWisataCimande.com</a>
     </div>
   </footer>
 
-  <!-- MODAL -->
   <div class="modal" id="imageModal">
     <div class="modal-content">
       <button class="close-btn">&times;</button>
@@ -379,7 +345,7 @@
     // Updated list after cloning
     const allItems = document.querySelectorAll('.carousel-item');
     let itemWidth = allItems[0].offsetWidth;
-    let currentIndex = itemsToShow; // Start from "real" first
+    let currentIndex = itemsToShow;
 
     track.style.transform = `translateX(${-itemWidth * currentIndex}px)`;
 
