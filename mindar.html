@@ -6,23 +6,27 @@
 
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
 
   <style>
     html, body {
       margin: 0; padding: 0; height: 100%;
       background: transparent;
       overflow: hidden;
+      touch-action: manipulation;
     }
     a-scene {
       position: fixed; inset: 0; width: 100%; height: 100%;
       z-index: 0;
     }
+    .a-enter-vr-button {
+      display: none !important;
+    }
     .back-button {
       position: absolute;
       top: 18px;
       left: 16px;
-      z-index: 20;
+      z-index: 30;
       background: transparent;
       color: white;
       border: 0;
@@ -33,7 +37,7 @@
     }
     .slide-dots {
       position: absolute;
-      bottom: 28px;
+      bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 20;
@@ -56,8 +60,54 @@
       transform: scale(1.3);
       opacity: 1;
     }
+    #lostOverlay {
+      position: absolute;
+      inset: 0;
+      top: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 25;
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity 0.4s ease;
+    }
+    #lostOverlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #lostOverlay img {
+      width: 72%;
+      aspect-ratio: 1/1;
+      object-fit: contain;
+      border-radius: 8px;
+      opacity: 0.5;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.04); opacity: 0.85; }
+    }
+    #lostOverlay .info {
+      text-align: center;
+      margin-top: 50px;
+      color: white;
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      opacity: 0.9;
+      transform: translateY(0);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    #lostOverlay .info a {
+      color: green;
+      font-style: italic;
+      text-decoration: none;
+    }
   </style>
 </head>
+
 
 <body>
   <a href="index.html" class="back-button">←</a>
@@ -70,6 +120,14 @@
     <div class="dot"></div>
   </div>
 
+  <div id="lostOverlay">
+    <img src="./assets/coverscan.jpg" alt="Peta Wisata Cimande">
+    <div class="info">
+      <p></br>Arahkan kamera ke peta</br>untuk telusuri Wisata Cimande</p>
+      <a href="https://desawisatacimande.com" target="_blank">Download & print peta</a>
+    </div>
+  </div>
+
   <a-scene
     mindar-image="imageTargetSrc: ./assets/marker.mind;
                   autoStart: true;
@@ -80,8 +138,8 @@
     device-orientation-permission-ui="enabled: true"
     renderer="antialias: true; alpha: true; physicallyCorrectLights: true;"
   >
-    <a-entity light="type: ambient; intensity: 0.8"></a-entity>
-    <a-entity light="type: directional; intensity: 0.8; position: 1 2 1"></a-entity>
+    <a-entity light="type: ambient; intensity: 1"></a-entity>
+    <a-entity light="type: directional; intensity: 1; position: 1 2 1"></a-entity>
 
     <a-assets>
       <img id="img-a0" src="./assets/coverpeta.jpg">
@@ -109,59 +167,59 @@
       <a-plane id="bgPlane" width="6" height="4" position="0 0 -0.1"
                material="color: black; opacity: 0; transparent: true;"></a-plane>
       <a-entity id="carousel" position="0 0 0" scale="1 1 1">
-        <!-- NEW MAIN SLIDE 0 -->
+        <!-- MAIN SLIDE 0 -->
         <a-entity class="main-slide" position="0 0 0">
-          <a-plane src="#img-a0" width="0.95" height="0.76" material="shader: flat"></a-plane>
+          <a-plane src="#img-a0" width="1.1" height="0.88" material="shader: flat"></a-plane>
+          <a-text value="Geser untuk telusuri | Klik gambar untuk visual 3D"
+          align="center" width="1.2" scale="0.8 0.8 0.8" position="0 -0.8 0.05" color="#fff"></a-text>
         </a-entity>
-
         <!-- MAIN SLIDE 1 -->
         <a-entity class="main-slide" position="1.3 0 0">
           <a-entity class="substack" position="0 0 0">
             <a-entity class="sub" position="0 0.6 0">
               <a-plane src="#img-a1" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Pencak Silat Cimande tidak hanya dipelajari untuk tujuan pertahanan diri, tetapi juga untuk melestarikan warisan leluhur yang mencerminkan kebijaksanaan masyarakat Sunda."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
             <a-entity class="sub" position="0 0 0">
               <a-plane src="#img-a2" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Lahir dari kearifan lokal masyarakat pada abad ke-18, Pencak Silat Cimande menjadi warisan budaya yang berpengaruh besar terhadap perkembangan pencak silat di Indonesia."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
             <a-entity class="sub" position="0 -0.6 0">
               <a-plane src="#img-a3" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Ciri khas aliran ini terletak pada keanggunan gerak dalam menghadapi serangan, di mana setiap jurus mencerminkan keseimbangan antara kekuatan fisik dan ketenangan batin."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
             <a-entity class="sub" position="0 -1.2 0">
               <a-plane src="#img-a4" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Lebih dari sekadar olahraga, Cimande menjadi sarana pembentukan karakter yang mengajarkan pentingnya menghormati guru, menjaga diri, serta menjalin harmoni dengan sesama."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
           </a-entity>
         </a-entity>
-
         <!-- MAIN SLIDE 2 -->
         <a-entity class="main-slide" position="1.3 0 0">
           <a-entity class="substack" position="0 0 0">
             <a-entity class="sub" position="0 0.6 0">
               <a-plane src="#img-b1" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Kebun salak ini menjadi destinasi ideal bagi keluarga maupun pelajar yang ingin berwisata alam sekaligus menambah pengetahuan pertanian tradisional."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
             <a-entity class="sub" position="0 0 0">
               <a-plane src="#img-b2" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Perkebunan salak Slebor di Desa Cimande menawarkan pengalaman agro wisata yang memadukan keindahan alam dengan aktivitas pertanian yang edukatif."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
             <a-entity class="sub" position="0 -0.6 0">
               <a-plane src="#img-b3" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Terletak di tengah hamparan persawahan yang asri, wisatawan dapat berjalan di antara deretan pohon salak Slebor yang tumbuh subur."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
             <a-entity class="sub" position="0 -1.2 0">
               <a-plane src="#img-b4" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Varietas salak Slebor terkenal dengan rasa manis dan teksturnya yang renyah, menjadikannya ikon pertanian khas Cimande yang banyak digemari wisatawan."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
           </a-entity>
         </a-entity>
@@ -172,22 +230,22 @@
             <a-entity class="sub" position="0 0.6 0">
               <a-plane src="#img-c1" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Melalui kegiatan ini, Desa Cimande menunjukkan komitmennya dalam mengembangkan potensi lokal tanpa meninggalkan kearifan tradisional yang menjadi ciri khasnya."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
             <a-entity class="sub" position="0 0 0">
               <a-plane src="#img-c2" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Desa Cimande menghadirkan agro wisata pengolahan tanaman lidah buaya yang memadukan unsur pertanian dan kreativitas masyarakat lokal."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
             <a-entity class="sub" position="0 -0.6 0">
               <a-plane src="#img-c3" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Wisatawan dapat melihat proses budidaya hingga pengolahan lidah buaya menjadi berbagai produk bernilai tambah, seperti minuman segar hingga bahan obat tradisional."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
             <a-entity class="sub" position="0 -1.2 0">
               <a-plane src="#img-c4" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Kegiatan ini tidak hanya memperkenalkan potensi pertanian desa, tetapi juga mengajarkan pentingnya inovasi dan pemanfaatan hasil alam secara berkelanjutan."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
           </a-entity>
         </a-entity>
@@ -198,28 +256,29 @@
             <a-entity class="sub" position="0 0.6 0">
               <a-plane src="#img-d1" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Dengan keindahan alamnya yang autentik dan suasananya yang damai, jelajah alam di kawasan Cimande ideal untuk mencari keseimbangan antara petualangan dan relaksasi."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
             <a-entity class="sub" position="0 0 0">
               <a-plane src="#img-d2" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Desa Cimande memiliki pesona alam pegunungan yang menawan sekaligus memberikan ruang bagi wisatawan untuk menikmati ketenangan jauh dari hiruk pikuk perkotaan."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
             <a-entity class="sub" position="0 -0.6 0">
               <a-plane src="#img-d3" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Terletak di kaki Gunung Salak dan Gede Pangrango, kawasan ini menawarkan jalur trekking dengan pemandangan hamparan perkebunan dan pepohonan rindang."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
             <a-entity class="sub" position="0 -1.2 0">
               <a-plane src="#img-d4" width="0.9" height="0.72" material="shader: flat"></a-plane>
               <a-text value="Aktivitas ini bukan sekadar olahraga, melainkan juga bentuk refleksi diri untuk menghargai keseimbangan antara manusia dan lingkungan."
-              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.43 0.05" color="#fff"></a-text>
+              align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
           </a-entity>
         </a-entity>
       </a-entity>
     </a-entity>
   </a-scene>
+
 
   <script>
     const marker = document.querySelector('#marker');
@@ -228,11 +287,13 @@
     const mainSlides = Array.from(document.querySelectorAll('.main-slide'));
     const dots = Array.from(document.querySelectorAll('.dot'));
     const dotsContainer = document.querySelector('#slideDots');
+    const lostOverlay = document.querySelector('#lostOverlay');
+
     let mainIndex = 0;
     const subIndex = [0,1,1,1,1];
     const animDur = 280;
-    const mainSpacing = 1.3;
-    const subSpacing = 0.77;
+    const mainSpacing = 1.2;
+    const subSpacing = 0.9;
     let markerVisible = false;
 
     // Animation helper
@@ -258,22 +319,19 @@
       subs.forEach((sub, i) => {
         const y = (i - active) * subSpacing;
         const text = sub.querySelector('a-text');
-        // Smooth position animation
         animateOnce(sub, 'animation__sub', {
           property: 'position',
           to: `0 ${-y} 0`,
           dur: animDur,
           easing: 'easeOutCubic'
         });
-        // Scale animation
-        const scale = (i === active) ? '0.95 0.95 0.95' : '0.65 0.65 0.65';
+        const scale = (i === active) ? '1.1 1.1 1.1' : '0.7 0.7 0.7';
         animateOnce(sub, 'animation__scale', {
           property: 'scale',
           to: scale,
           dur: animDur,
           easing: 'easeOutCubic'
         });
-        // Opacity + visibility
         const plane = sub.querySelector('a-plane');
         if (i === active) {
           plane.setAttribute('material', 'opacity', 1);
@@ -309,29 +367,27 @@
         else if(dy>TH && mainIndex>0){ subIndex[mainIndex]=Math.max(subIndex[mainIndex]-1,0); updateSubstack(mainIndex);}
       }
     }, {passive:true});
-
-    // Marker events
     marker.addEventListener('targetFound', ()=>{
-      markerVisible=true;
-      dotsContainer.style.opacity=1;
-      // background fade in
+      markerVisible = true;
+      lostOverlay.classList.add('hidden'); // hide overlay
+      dotsContainer.style.opacity = 1;
       animateOnce(bgPlane, 'animation__fadein', {
         property: 'material.opacity', from: 0, to: 0.7, dur: 400, easing: 'easeOutCubic'
       });
       animateOnce(carousel, 'animation__up', {
-        property:'position', from:'-0.1 -0.2 0', to:'-0.1 0.2 0', dur:400, easing:'easeOutCubic'
+        property:'position', from:'0 -0.4 0', to:'0 0 0', dur:400, easing:'easeOutCubic'
       });
     });
 
     marker.addEventListener('targetLost', ()=>{
-      markerVisible=false;
-      dotsContainer.style.opacity=0;
-      // background fade out
+      markerVisible = false;
+      dotsContainer.style.opacity = 0;
+      lostOverlay.classList.remove('hidden'); // show overlay
       animateOnce(bgPlane, 'animation__fadeout', {
         property: 'material.opacity', from: bgPlane.getAttribute('material').opacity, to: 0, dur: 400, easing: 'easeInCubic'
       });
       animateOnce(carousel, 'animation__down', {
-        property:'position', from:carousel.getAttribute('position'), to:'-0.1 -0.2 0', dur:400, easing:'easeInCubic'
+        property:'position', from:carousel.getAttribute('position'), to:'0 0.4 0', dur:400, easing:'easeInCubic'
       });
     });
   </script>
