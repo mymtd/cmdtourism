@@ -15,15 +15,15 @@
       position: relative;
     }
 
-    /* ==== HERO BACKGROUND IMAGE ==== */
+    /* ==== HERO IMAGE ==== */
     .hero-bg {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 600px; /* covers header + carousel + hero */
+      height: 600px;
       background: url("./assets/img-alam1.jpg") no-repeat center/cover;
-      opacity: 0.25; /* opacity */
+      opacity: 0.25;
       z-index: 0;
     }
     .hero-bg::after {
@@ -32,7 +32,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 200px; /* how tall the fade is */
+      height: 200px;
       background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #fff 100%);
     }
     header, .carousel-container, .hero {
@@ -116,6 +116,7 @@
       line-height: 1.2;
       color: #555;
     }
+
     /* ==== CTA BUTTON ==== */
     .cta {
       display: inline-block;
@@ -308,9 +309,9 @@
 
   <footer>
     <div class="social">
-      <a href="https://maps.app.goo.gl/YxYSKX5mXFWscWH2A">📍 Desa Wisata Cimande</a>
-      <a href="https://instagram.com/DesaWisataCimande">📷 @DesaWisataCimande</a>
-      <a href="https://desawisatacimande.com">🌐 DesaWisataCimande.com</a>
+      <a href="https://maps.app.goo.gl/YxYSKX5mXFWscWH2A" target="_blank" rel="noopener noreferrer">📍 Desa Wisata Cimande</a>
+      <a href="https://instagram.com/DesaWisataCimande" target="_blank" rel="noopener noreferrer">📷 @DesaWisataCimande</a>
+      <a href="https://desawisatacimande.com" target="_blank">🌐 DesaWisataCimande.com</a>
     </div>
   </footer>
 
@@ -346,7 +347,6 @@
     const allItems = document.querySelectorAll('.carousel-item');
     let itemWidth = allItems[0].offsetWidth;
     let currentIndex = itemsToShow;
-
     track.style.transform = `translateX(${-itemWidth * currentIndex}px)`;
 
     function moveTo(index) {
@@ -354,7 +354,6 @@
       track.style.transform = `translateX(${-itemWidth * index}px)`;
       currentIndex = index;
     }
-
     function nextSlide() { moveTo(currentIndex + 1); }
     function prevSlide() { moveTo(currentIndex - 1); }
 
@@ -370,11 +369,8 @@
         track.style.transform = `translateX(${-itemWidth * currentIndex}px)`;
       }
     });
-
     nextBtn.addEventListener('click', nextSlide);
     prevBtn.addEventListener('click', prevSlide);
-
-    // Auto scroll
     setInterval(nextSlide, 3000);
 
     window.addEventListener('resize', () => {
@@ -383,14 +379,13 @@
       track.style.transform = `translateX(${-itemWidth * currentIndex}px)`;
     });
 
-    // ==== MODAL LOGIC ====
     const modal = document.getElementById('imageModal');
     const closeBtn = modal.querySelector('.close-btn');
     const modalTitle = document.getElementById('modalTitle');
     const modalDesc = document.getElementById('modalDesc');
     const modalImg = document.getElementById('modalImg');
 
-    // Attach click handler to ALL items (original + cloned)
+    // Modal click handler
     function attachModalEvents() {
       document.querySelectorAll('.carousel-item').forEach(item => {
         item.addEventListener('click', () => {
@@ -402,11 +397,8 @@
       });
     }
     attachModalEvents();
-
     closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
     modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
   </script>
-
-
 </body>
 </html>

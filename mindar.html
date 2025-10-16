@@ -159,6 +159,16 @@
       <img id="img-d2" src="./assets/img-alam1.jpg">
       <img id="img-d3" src="./assets/img-alam2.jpg">
       <img id="img-d4" src="./assets/img-alam3.jpg">
+
+      <a-asset-item id="3d-kujang" src="./assets/3d-kujang.glb"></a-asset-item>
+      <a-asset-item id="3d-salak" src="./assets/3d-salak.glb"></a-asset-item>
+      <a-asset-item id="3d-lidah" src="./assets/3d-lidah.glb"></a-asset-item>
+      <a-asset-item id="3d-gunung" src="./assets/3d-gunung.glb"></a-asset-item>
+      <a-asset-item id="3d-bunga1" src="./assets/3d-bunga1.glb"></a-asset-item>
+      <a-asset-item id="3d-bunga2" src="./assets/3d-bunga2.glb"></a-asset-item>
+      <a-asset-item id="3d-tanam1" src="./assets/3d-tanam1.glb"></a-asset-item>
+      <a-asset-item id="3d-tanam2" src="./assets/3d-tanam2.glb"></a-asset-item>
+      <a-asset-item id="3d-tanam3" src="./assets/3d-tanam3.glb"></a-asset-item>
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false" fov="150"></a-camera>
@@ -170,6 +180,8 @@
         <!-- MAIN SLIDE 0 -->
         <a-entity class="main-slide" position="0 0 0">
           <a-plane src="#img-a0" width="1.1" height="0.88" material="shader: flat"></a-plane>
+          <a-gltf-model src="#3d-bunga1" position="0 0.1 0.2" scale="0.2 0.2 0.2" rotation="0 0 0" visible="false"
+          animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear"></a-gltf-model>
           <a-text value="Geser untuk telusuri | Klik gambar untuk visual 3D"
           align="center" width="1.2" scale="0.8 0.8 0.8" position="0 -0.8 0.05" color="#fff"></a-text>
         </a-entity>
@@ -183,6 +195,8 @@
             </a-entity>
             <a-entity class="sub" position="0 0 0">
               <a-plane src="#img-a2" width="0.9" height="0.72" material="shader: flat"></a-plane>
+              <a-gltf-model src="#3d-kujang" position="0 0.1 0.2" scale="0.2 0.2 0.2" rotation="0 0 0" visible="false"
+              animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear"></a-gltf-model>
               <a-text value="Lahir dari kearifan lokal masyarakat pada abad ke-18, Pencak Silat Cimande menjadi warisan budaya yang berpengaruh besar terhadap perkembangan pencak silat di Indonesia."
               align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
@@ -208,6 +222,8 @@
             </a-entity>
             <a-entity class="sub" position="0 0 0">
               <a-plane src="#img-b2" width="0.9" height="0.72" material="shader: flat"></a-plane>
+              <a-gltf-model src="#3d-salak" position="0 0.1 0.2" scale="0.2 0.2 0.2" rotation="0 0 0" visible="false"
+              animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear"></a-gltf-model>
               <a-text value="Perkebunan salak Slebor di Desa Cimande menawarkan pengalaman agro wisata yang memadukan keindahan alam dengan aktivitas pertanian yang edukatif."
               align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
@@ -223,7 +239,6 @@
             </a-entity>
           </a-entity>
         </a-entity>
-
         <!-- MAIN SLIDE 3 -->
         <a-entity class="main-slide" position="2.6 0 0">
           <a-entity class="substack" position="0 0 0">
@@ -234,6 +249,8 @@
             </a-entity>
             <a-entity class="sub" position="0 0 0">
               <a-plane src="#img-c2" width="0.9" height="0.72" material="shader: flat"></a-plane>
+              <a-gltf-model src="#3d-lidah" position="0 0.1 0.2" scale="0.2 0.2 0.2" rotation="0 0 0" visible="false"
+              animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear"></a-gltf-model>
               <a-text value="Desa Cimande menghadirkan agro wisata pengolahan tanaman lidah buaya yang memadukan unsur pertanian dan kreativitas masyarakat lokal."
               align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
@@ -249,7 +266,6 @@
             </a-entity>
           </a-entity>
         </a-entity>
-
         <!-- MAIN SLIDE 4 -->
         <a-entity class="main-slide" position="3.9 0 0">
           <a-entity class="substack" position="0 0 0">
@@ -260,6 +276,8 @@
             </a-entity>
             <a-entity class="sub" position="0 0 0">
               <a-plane src="#img-d2" width="0.9" height="0.72" material="shader: flat"></a-plane>
+              <a-gltf-model src="#3d-gunung" position="0 0.1 0.2" scale="0.2 0.2 0.2" rotation="0 0 0" visible="false"
+              animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear"></a-gltf-model>
               <a-text value="Desa Cimande memiliki pesona alam pegunungan yang menawan sekaligus memberikan ruang bagi wisatawan untuk menikmati ketenangan jauh dari hiruk pikuk perkotaan."
               align="center" width="1" scale="0.7 0.7 0.7" position="0 -0.44 0.05" color="#fff"></a-text>
             </a-entity>
@@ -342,11 +360,10 @@
         }
       });
     }
-
     mainSlides.forEach((_,i)=>updateSubstack(i));
     updateMainCarousel(mainIndex);
 
-    // Swipe only when marker visible
+    // Swipe behaviour
     let startX=0, startY=0;
     document.body.addEventListener('touchstart', e=>{
       if(!markerVisible) return;
@@ -367,10 +384,22 @@
         else if(dy>TH && mainIndex>0){ subIndex[mainIndex]=Math.max(subIndex[mainIndex]-1,0); updateSubstack(mainIndex);}
       }
     }, {passive:true});
+
+    // Show models
+    document.querySelectorAll('a-plane').forEach(plane => {
+      const model = plane.parentElement.querySelector('a-gltf-model');
+      if(!model) return;
+      plane.addEventListener('click', ()=>{
+        const isVisible = model.getAttribute('visible');
+        document.querySelectorAll('a-gltf-model').forEach(m=>m.setAttribute('visible', false));
+        model.setAttribute('visible', !isVisible);
+      });
+    });
+
     marker.addEventListener('targetFound', ()=>{
       markerVisible = true;
-      lostOverlay.classList.add('hidden'); // hide overlay
       dotsContainer.style.opacity = 1;
+      lostOverlay.classList.add('hidden');
       animateOnce(bgPlane, 'animation__fadein', {
         property: 'material.opacity', from: 0, to: 0.7, dur: 400, easing: 'easeOutCubic'
       });
@@ -382,13 +411,14 @@
     marker.addEventListener('targetLost', ()=>{
       markerVisible = false;
       dotsContainer.style.opacity = 0;
-      lostOverlay.classList.remove('hidden'); // show overlay
+      lostOverlay.classList.remove('hidden');
       animateOnce(bgPlane, 'animation__fadeout', {
         property: 'material.opacity', from: bgPlane.getAttribute('material').opacity, to: 0, dur: 400, easing: 'easeInCubic'
       });
       animateOnce(carousel, 'animation__down', {
         property:'position', from:carousel.getAttribute('position'), to:'0 0.4 0', dur:400, easing:'easeInCubic'
       });
+      document.querySelectorAll('a-gltf-model').forEach(m=>m.setAttribute('visible', false));
     });
   </script>
 </body>
