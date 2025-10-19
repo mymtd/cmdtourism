@@ -6,7 +6,7 @@
 
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
 
   <style>
     html, body {
@@ -50,7 +50,7 @@
     .dot {
       width: 12px; height: 12px;
       border-radius: 50%;
-      background: #888;
+      background: gray;
       opacity: 0.6;
       transform-origin: center;
       transition: all 0.25s ease;
@@ -84,7 +84,7 @@
       max-width: 100%;
       object-fit: cover;
       border-radius: 8px;
-      opacity: 0.3;
+      opacity: 1;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
       animation: pulse 3s ease-in-out infinite;
     }
@@ -96,7 +96,7 @@
     }
     @keyframes pulse {
       0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.04); opacity: 0.85; }
+      50% { transform: scale(1.05); opacity: 0.7; }
     }
     #lostOverlay .info {
       text-align: center;
@@ -139,15 +139,16 @@
   <a-scene
     mindar-image="imageTargetSrc: ./assets/marker.mind;
                   autoStart: true;
+                  maxTrack: 1;
                   filterMinCF: 0.001;
                   filterBeta: 0.05;"
     embedded
     vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false"
-    renderer="antialias: true; alpha: true; physicallyCorrectLights: true;"
+    renderer="colorManagement: false; physicallyCorrectLights: false; antialias: false;"
   >
     <a-entity light="type: ambient; intensity: 1"></a-entity>
-    <a-entity light="type: directional; intensity: 1; position: 1 2 1"></a-entity>
+    <!--a-entity light="type: directional; intensity: 1; position: 1 2 1"></a-entity-->
 
     <a-assets>
       <img id="img-a0" src="./assets/coverpeta.jpg">
@@ -185,7 +186,6 @@
     <a-entity id="marker" mindar-image-target="targetIndex: 0; autoHide: false;">
       <a-plane id="bgPlane" width="12" height="10" position="0 0 -0.1" material="color: black; opacity: 0; transparent: true;"></a-plane>
       <a-entity id="carousel" position="0 0 0" scale="1 1 1">
-        <!-- MAIN SLIDE 0 -->
         <a-entity class="main-slide" position="0 0 0">
           <a-gltf-model src="#3d-bunga2" position="0 -0.48 0.05" scale="0.18 0.18 0.18" rotation="0 90 90" visible="true"
           animation="property: rotation; to: 360 90 90; loop: true; dur: 10000; easing: linear"></a-gltf-model>
@@ -197,7 +197,6 @@
           <a-text value="Slide untuk telusuri obyek Wisata Cimande"
           align="center" width="1.2" scale="0.8 0.8 0.8" position="0 -0.85 0.05" color="#fff"></a-text>
         </a-entity>
-        <!-- MAIN SLIDE 1 -->
         <a-entity class="main-slide" position="1.3 0 0">
           <a-gltf-model src="#3d-kujang" position="-0.3 0.41 0.1" scale="0.18 0.18 0.18" rotation="90 90 0" visible="true"></a-gltf-model>
           <a-gltf-model src="#3d-bunga2" position="-0.4 0.41 0.05" scale="0.15 0.05 0.15" rotation="0 90 90" visible="true"
@@ -225,7 +224,6 @@
             </a-entity>
           </a-entity>
         </a-entity>
-        <!-- MAIN SLIDE 2 -->
         <a-entity class="main-slide" position="1.3 0 0">
           <a-gltf-model src="#3d-salak" position="0 0.34 0.15" scale="0.12 0.12 0.12" rotation="0 0 0" visible="true"
           animation="property: rotation; to: 0 360 0; loop: true; dur: 5000; easing: linear"></a-gltf-model>
@@ -254,7 +252,6 @@
             </a-entity>
           </a-entity>
         </a-entity>
-        <!-- MAIN SLIDE 3 -->
         <a-entity class="main-slide" position="2.6 0 0">
           <a-gltf-model src="#3d-lidah" position="-0.33 -0.38 0.15" scale="0.12 0.12 0.12" rotation="0 0 0" visible="true"
           animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear"></a-gltf-model>
@@ -285,14 +282,13 @@
             </a-entity>
           </a-entity>
         </a-entity>
-        <!-- MAIN SLIDE 4 -->
         <a-entity class="main-slide" position="3.9 0 0">
-          <a-gltf-model src="#3d-gunung" position="0 0.4 0" scale="0.12 0.1 0.12" rotation="0 0 0" visible="true"
+          <a-gltf-model src="#3d-gunung" position="0 0.4 0" scale="0.12 0.08 0.12" rotation="0 0 0" visible="true"
           animation="property: rotation; to: 0 360 0; loop: true; dur: 15000; easing: linear"></a-gltf-model>
           <a-gltf-model src="#3d-tanam2" position="-0.5 -0.4 0.05" scale="0.2 0.25 0.2" rotation="0 0 0" visible="true"
-          animation="property: rotation; to: 0 360 0; loop: true; dur: 40000; easing: linear"></a-gltf-model>
+          animation="property: rotation; to: 0 360 0; loop: true; dur: 20000; easing: linear"></a-gltf-model>
           <a-gltf-model src="#3d-tanam3" position="0.5 -0.4 0.05" scale="0.2 0.25 0.2" rotation="0 0 0" visible="true"
-          animation="property: rotation; to: 0 -360 0; loop: true; dur: 40000; easing: linear"></a-gltf-model>
+          animation="property: rotation; to: 0 -360 0; loop: true; dur: 20000; easing: linear"></a-gltf-model>
           <a-entity class="substack" position="0 0 0">
             <a-entity class="sub" position="0 0.6 0">
               <a-plane src="#img-d1" width="0.9" height="0.72" material="shader: flat"></a-plane>
@@ -331,13 +327,19 @@
     const dots = Array.from(document.querySelectorAll('.dot'));
     const dotsContainer = document.querySelector('#slideDots');
     const lostOverlay = document.querySelector('#lostOverlay');
-
+    
+    let markerVisible = false;
+    let startX = 0;
+    let startY = 0;
     let mainIndex = 0;
     const subIndex = [0,1,1,1,1];
     const animDur = 280;
     const mainSpacing = 1.2;
     const subSpacing = 0.9;
-    let markerVisible = false;
+
+    let isActive = false;
+    let lastRender = 0;
+    const fpsLimit = 30;
 
     // Animation helper
     function animateOnce(el, name, data) {
@@ -346,6 +348,7 @@
       el.setAttribute(name, data);
     }
 
+    // Main slides
     function updateMainCarousel(newIdx){
       mainSlides.forEach((ms, i)=>{
         const x = (i - newIdx) * mainSpacing;
@@ -356,6 +359,7 @@
       dots.forEach((d,i)=>d.classList.toggle('active', i===newIdx));
     }
 
+    // Sub slides
     function updateSubstack(mainIdx){
       const subs = mainSlides[mainIdx].querySelectorAll('.sub');
       const active = subIndex[mainIdx];
@@ -389,7 +393,6 @@
     updateMainCarousel(mainIndex);
 
     // Swipe behaviour
-    let startX=0, startY=0;
     document.body.addEventListener('touchstart', e=>{
       if(!markerVisible) return;
       startX = e.touches[0].clientX;
@@ -410,7 +413,9 @@
       }
     }, {passive:true});
 
+    // Marker hit
     marker.addEventListener('targetFound', ()=>{
+      isActive = true;
       markerVisible = true;
       dotsContainer.style.opacity = 1;
       lostOverlay.classList.add('hidden');
@@ -422,7 +427,9 @@
       });
     });
 
+    // Maker lost
     marker.addEventListener('targetLost', ()=>{
+      isActive = false;
       markerVisible = false;
       dotsContainer.style.opacity = 0;
       lostOverlay.classList.remove('hidden');
@@ -432,6 +439,19 @@
       animateOnce(carousel, 'animation__down', {
         property:'position', from:carousel.getAttribute('position'), to:'0 0.4 0', dur:400, easing:'easeInCubic'
       });
+    });
+
+    // Optimizer
+    AFRAME.registerComponent("render-optimizer", {
+      tick: function (time, delta) {
+        if (!isActive) return;
+      }
+    });
+    AFRAME.registerComponent("fps-throttle", {
+      tick: function (time) {
+        if (time - lastRender < 1000 / fpsLimit) return;
+        lastRender = time;
+      }
     });
   </script>
 </body>
